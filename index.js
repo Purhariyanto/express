@@ -4,33 +4,10 @@ const app = express();
 
 app.get("/q/:q", (req, res) => {
   const fs = require('fs');
-  const tag = "| # |";
-  const q = req.params.q
-
-  const readStream = fs.createReadStream('/tmp/q.txt')
-  readStream.on('open', function () {
-    readStream.pipe(res)
-  })
-
-  readStream.on('error', function (err) {
-    console.log(err);
-  })
-
-  try {
-    fs.writeFileSync('./q.txt', "ok");
-    console.log(1);
-  } catch (err) {
-    console.log(err);
-  }
-
-  try {
-    const file = fs.createWriteStream('/tmp/q.txt');
-file.write('hello, ');
-    console.log(2);
-  } catch (err) {
-    console.log(err);
-  }
-
+  
+  const file = fs.createWriteStream('/tmp/q.txt');
+  file.write('hello, ');
+  file.end('world!');
   
   res.send(req.params.q);
 }),
