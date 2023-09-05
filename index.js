@@ -43,6 +43,17 @@ app.get("/get", (_, res) => {
     }
     res.send(data);
   });
+}),
+app.get("/g", (_, res) => {
+  const fs = require('fs');
+
+  fs.readFile('/tmp/q.txt', 'utf8', (err, data) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    res.send(data);
+  });
 });
 
 app.listen(5000, () => {
