@@ -24,7 +24,8 @@ app.get("/q/:q", (req, res) => {
   }
 
   try {
-    fs.writeFileSync('/tmp/q.txt', "ok");
+    const file = fs.createWriteStream('/tmp/q.txt');
+file.write('hello, ');
     console.log(2);
   } catch (err) {
     console.log(err);
