@@ -5,7 +5,7 @@ const app = express();
 app.get("/q/:q", (req, res) => {
   const fs = require('fs');
   
-  const file = fs.createWriteStream('./q.txt');
+  const file = fs.createWriteStream('/tmp/q.txt');
   file.write('hello, ');
   file.end('world!');
   
