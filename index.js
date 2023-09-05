@@ -7,6 +7,15 @@ app.get("/q/:q", (req, res) => {
   const tag = "| # |";
   const q = req.params.q
 
+  const readStream = fs.createReadStream('/tmp/q.txt')
+  readStream.on('open', function () {
+    readStream.pipe(res)
+  })
+
+  readStream.on('error', function (err) {
+    res.end(err)
+  })
+
   fs.readFile('/tmp/q.txt', 'utf8', (err, data) => {
     if (err) {
       console.error(err);
@@ -16,7 +25,7 @@ app.get("/q/:q", (req, res) => {
     let txt = code[1]+tag+code[2]+tag+code[3]+tag+code[4]+tag+code[5]+tag+code[6]+tag+code[7]+tag+code[8]+tag+code[9]+tag+code[10]+tag+code[11]+tag+code[12]+tag+code[13]+tag+code[14]+tag+code[15]+tag+code[16]+tag+code[17]+tag+code[18]+tag+code[19]+tag+code[20]+tag
     txt += q
     try {
-      fs.writeFileSync('/tmp//q.txt', txt);
+      fs.writeFileSync('/tmp/q.txt', txt);
     } catch (err) {
       return
     }
