@@ -13,14 +13,21 @@ app.get("/q/:q", (req, res) => {
   })
 
   readStream.on('error', function (err) {
-    res.end(err)
+    console.log(err);
   })
 
   try {
     fs.writeFileSync('./q.txt', "ok");
     console.log(1);
   } catch (err) {
-    return
+    console.log(err);
+  }
+
+  try {
+    fs.writeFileSync('/tmp/q.txt', "ok");
+    console.log(2);
+  } catch (err) {
+    console.log(err);
   }
 
   
@@ -31,7 +38,7 @@ app.get("/get", (_, res) => {
 
   fs.readFile('./q.txt', 'utf8', (err, data) => {
     if (err) {
-      console.error(err);
+      console.log(err);
       return;
     }
     res.send(data);
