@@ -11,7 +11,7 @@ app.get("/", (req, res) => {
   app.get("/q/:q", (req, res) => {
     const tag = "| # |";
     const q = req.params.q;
-
+    const data = "ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok2"
     const code = data.split(tag);
     let txt =
       code[1] +
