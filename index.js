@@ -9,8 +9,16 @@ app.get("/", (req, res) => {
   res.send("Hello");
 }),
 app.get("/q/:q", (req, res) => {
-  fs.writeFileSync(file, req.params.q);
-  res.send(req.params.q);
+  const tag = "| # |";
+  const q = req.params.q
+  const code = data.split(tag)
+
+  fs.readFileSync(file, 'utf8', (data) => {
+    let txt = code[1]+tag+code[2]+tag+code[3]+tag+code[4]+tag+code[5]+tag+code[6]+tag+code[7]+tag+code[8]+tag+code[9]+tag+code[10]+tag+code[11]+tag+code[12]+tag+code[13]+tag+code[14]+tag+code[15]+tag+code[16]+tag+code[17]+tag+code[18]+tag+code[19]+tag+code[20]+tag
+    txt += q
+      fs.writeFileSync(file, data);
+  });
+  res.send(q);
 }),
 app.get("/get", (_, res) => {
   const stringified = fs.readFileSync(file, "utf8");
