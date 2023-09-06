@@ -9,11 +9,12 @@ app.get("/q/:q", (req, res) => {
 
   // const file = fs.createWriteStream("/tmp/test.json");
   // file.write(req.params.q);
-  fs.writeFileSync('test.json', req.params.q);
+  const file = path.join(process.cwd(), "test.json");
+  fs.writeFileSync(file, req.params.q);
   res.send(req.params.q);
 }),
   app.get("/get", (_, res) => {
-    const file = path.join(process.cwd(), "/tmp/test.json");
+    const file = path.join(process.cwd(), "test.json");
     const stringified = fs.readFileSync(file, "utf8");
 
     res.setHeader("Content-Type", "text/html; charset=utf-8");
