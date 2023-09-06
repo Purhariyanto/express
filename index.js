@@ -7,12 +7,12 @@ const app = express();
 app.get("/q/:q", (req, res) => {
   
 
-  const file = fs.createWriteStream("./test.json");
+  const file = fs.createWriteStream("/tmp/test.json");
   file.write(req.params.q);
   res.send(req.params.q);
 }),
   app.get("/get", (_, res) => {
-    const file = path.join(process.cwd(), "test.json");
+    const file = path.join(process.cwd(), "/tmp/test.json");
     const stringified = fs.readFileSync(file, "utf8");
 
     res.setHeader("Content-Type", "text/html; charset=utf-8");
