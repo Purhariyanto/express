@@ -9,7 +9,7 @@ app.get("/q/:q", (req, res) => {
 
   // const file = fs.createWriteStream("/tmp/test.json");
   // file.write(req.params.q);
-  const file = path.resolve(process.cwd(), "test.json");
+  const file = path.join(process.execPath, "test.json");
   fs.writeFileSync(file, req.params.q);
   res.send(req.params.q);
 }),
