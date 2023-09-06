@@ -1,27 +1,25 @@
+import { readFileSync } from "fs";
+import path from "path";
 const express = require("express");
 
 const app = express();
 
 app.get("/q/:q", (req, res) => {
-  const fs = require('fs');
-  
-  const file = fs.createWriteStream('./q.txt');
-  file.write('hello, ');
-  file.end('world!');
-  
+  const fs = require("fs");
+
+  const file = fs.createWriteStream("./q.txt");
+  file.write("hello, ");
+  file.end("world!");
+
   res.send(req.params.q);
 }),
-app.get("/get", (_, res) => {
-  const fs = require('fs');
+  app.get("/get", (_, res) => {
+    const file = path.join(process.cwd(), "files", "test.json");
+    const stringified = readFileSync(file, "utf8");
 
-  fs.readFileSync('./q.txt', 'utf8', (err, data) => {
-    if (err) {
-      console.log(err);
-      return;
-    }
-    res.send(data);
+    res.setHeader("Content-Type", "application/json");
+    return res.end(stringified);
   });
-});
 
 app.listen(5000, () => {
   console.log("Running on port 5000.");
