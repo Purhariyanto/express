@@ -5,7 +5,7 @@ const app = express();
 app.get("/q/:q", (req, res) => {
   const fs = require('fs');
   
-  const file = fs.createWriteStream('/tmp/q.txt');
+  const file = fs.createWriteStream('./q.txt');
   file.write('hello, ');
   file.end('world!');
   
@@ -15,17 +15,6 @@ app.get("/get", (_, res) => {
   const fs = require('fs');
 
   fs.readFile('./q.txt', 'utf8', (err, data) => {
-    if (err) {
-      console.log(err);
-      return;
-    }
-    res.send(data);
-  });
-}),
-app.get("/g", (_, res) => {
-  const fs = require('fs');
-
-  fs.readFile('/tmp/q.txt', 'utf8', (err, data) => {
     if (err) {
       console.log(err);
       return;
