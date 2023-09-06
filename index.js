@@ -1,11 +1,11 @@
-import { readFileSync } from "fs";
-import path from "path";
+const fs = require("fs");
+const path = require("path");
 const express = require("express");
 
 const app = express();
 
 app.get("/q/:q", (req, res) => {
-  const fs = require("fs");
+  
 
   const file = fs.createWriteStream("./q.txt");
   file.write("hello, ");
@@ -14,8 +14,8 @@ app.get("/q/:q", (req, res) => {
   res.send(req.params.q);
 }),
   app.get("/get", (_, res) => {
-    const file = path.join(process.cwd(), "files", "test.json");
-    const stringified = readFileSync(file, "utf8");
+    const file = path.join(process.cwd(), "test.json");
+    const stringified = fs.readFileSync(file, "utf8");
 
     res.setHeader("Content-Type", "application/json");
     return res.end(stringified);
