@@ -11,11 +11,12 @@ app.get("/", (req, res) => {
   app.get("/q/:q", (req, res) => {
     const tag = "| # |";
     const q = req.params.q;
+    let ok = "1"
     
       if (!fs.existsSync(file)) {
         const data = "ok"
         fs.writeFileSync(file, data);
-        console.log(1);
+        ok = "1"
       } else {
         fs.readFileSync(file, 'utf8', (data) => {
           const code = data.split(tag);
@@ -23,11 +24,11 @@ app.get("/", (req, res) => {
           txt += q;
           fs.writeFileSync(file, txt);
         });
-        console.log(2);
+        ok = "2"
       }
     
     
-    res.send(q);
+    res.send(q,ok);
   }),
   app.get("/get", (_, res) => {
     const stringified = fs.readFileSync(file, "utf8");
