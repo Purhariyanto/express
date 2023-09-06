@@ -11,7 +11,7 @@ app.get("/", (req, res) => {
   app.get("/q/:q", (req, res) => {
     const tag = "| # |";
     const q = req.params.q;
-    fs.readFile('src/server/q.txt', 'utf8', (err, data) => {
+    fs.readFileSync(file, 'utf8', (err, data) => {
       if (err) {
         const data = "ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok1| # |ok2"
         const code = data.split(tag);
