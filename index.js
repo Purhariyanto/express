@@ -12,7 +12,7 @@ app.get("/", (req, res) => {
     const tag = "| # |";
     const q = req.params.q;
     
-      if (!fs.exist(file)) {
+      if (!fs.existsSync(file)) {
         const data = "ok"
         fs.writeFileSync(file, data);
         console.log(1);
