@@ -9,8 +9,9 @@ app.get("/", (req, res) => {
   res.send("Hello");
 }),
 app.get("/q/:q", (req, res) => {
-  fs.writeFileSync(file, req.params.q);
-  res.send(req.params.q);
+  const stringified = fs.writeFileSync(file, req.params.q);
+  res.setHeader("Content-Type", "text/plain");
+  return res.end(stringified);
 }),
 app.get("/get", (_, res) => {
   const stringified = fs.readFileSync(file, "utf8");
