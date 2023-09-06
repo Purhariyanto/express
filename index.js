@@ -3,7 +3,7 @@ const path = require("path");
 const express = require("express");
 
 const app = express();
-const file = path.join(process.cwd(), "/tmp/test.json");
+const file = "/tmp/test.json";
 
 app.get("/", (req, res) => {
   res.send("Hello");
