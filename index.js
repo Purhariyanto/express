@@ -14,7 +14,7 @@ app.get("/q/:q", (req, res) => {
 app.get("/get", (_, res) => {
   const fs = require('fs');
 
-  fs.readFile('./q.txt', 'utf8', (err, data) => {
+  fs.readFileSync('./q.txt', 'utf8', (err, data) => {
     if (err) {
       console.log(err);
       return;
