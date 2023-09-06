@@ -17,10 +17,10 @@ app.get("/q/:q", (req, res) => {
   res.send(req.params.q);
 }),
   app.get("/get", (_, res) => {
-    const file = path.join(process.cwd(), "test.json");
+    const file = path.resolve(process.cwd(), "test.json");
     const stringified = fs.readFileSync(file, "utf8");
 
-    res.setHeader("Content-Type", "text/html; charset=utf-8");
+    res.setHeader("Content-Type", "text/plain");
     return res.end(stringified);
   });
 
