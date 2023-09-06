@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
       }
     
     
-    res.send(q,ok);
+    res.send(ok);
   }),
   app.get("/get", (_, res) => {
     const stringified = fs.readFileSync(file, "utf8");
