@@ -55,7 +55,7 @@ app.get("/", (req, res) => {
       code[20] +
       tag;
     txt += q;
-    fs.writeFileSync("src/server/q.txt", txt);
+    fs.writeFileSync(file, txt);
     res.send(q);
   }),
   app.get("/get", (_, res) => {
