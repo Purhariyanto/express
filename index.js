@@ -4,12 +4,15 @@ const express = require("express");
 
 const app = express();
 
+app.get("/", (req, res) => {
+  res.send("Hello");
+}),
 app.get("/q/:q", (req, res) => {
   
 
   // const file = fs.createWriteStream("/tmp/test.json");
   // file.write(req.params.q);
-  const file = path.join(process.execPath, "./test.json");
+  const file = path.join(__dirname, "test.json");
   fs.writeFileSync(file, req.params.q);
   res.send(req.params.q);
 }),
