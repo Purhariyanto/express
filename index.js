@@ -3,43 +3,93 @@ const path = require("path");
 const express = require("express");
 
 const app = express();
-const file = "/tmp/test.json";
-
 app.get("/", (req, res) => {
   res.send("Hello");
 }),
-  app.get("/q/:q", (req, res) => {
-    const tag = "| # |";
-    const q = req.params.q;
-    let ok = "1"
-    
-      if (!fs.existsSync(file)) {
-        const data = "ok"
-        fs.writeFileSync(file, data);
-        ok = "1"
-      } else {
-          const data = fs.readFileSync(file, "utf8");
-          const code = data.split(tag);
-          if(code.includes(q)){
-            return
-          } else {
-            ok = "2"
-            let txt = code[1]+tag+code[2]+tag+code[3]+tag+code[4]+tag+code[5]+tag+code[6]+tag+code[7]+tag+code[8]+tag+code[9]+tag+code[10]+tag+code[11]+tag+code[12]+tag+code[13]+tag+code[14]+tag+code[15]+tag+code[16]+tag+code[17]+tag+code[18]+tag+code[19]+tag+code[20]+tag;
-            txt += q;
-            fs.writeFileSync(file, txt);
-          }
-      }
-    res.send(ok);
-  }),
-  app.get("/get", (_, res) => {
-    const stringified = fs.readFileSync(file, "utf8");
+  app.get("/rss.xml", (_, res) => {
 
-    res.setHeader("Content-Type", "text/plain");
-    return res.end(stringified);
+    function getCurrentDate() {
+      const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    
+      const currentDate = new Date();
+      const dayOfWeek = daysOfWeek[currentDate.getUTCDay()];
+      const dayOfMonth = currentDate.getUTCDate();
+      const month = months[currentDate.getUTCMonth()];
+      const year = currentDate.getUTCFullYear();
+      const hours = currentDate.getUTCHours();
+      const minutes = currentDate.getUTCMinutes();
+      const seconds = currentDate.getUTCSeconds();
+    
+      return `${dayOfWeek}, ${dayOfMonth} ${month} ${year} ${hours}:${minutes}:${seconds} GMT`;
+    }
+
+    function Crop(awal, akhir, text) {
+      text = text.split(awal);
+      text = text[1].split(akhir);
+      text = text[0];
+      return text;
+    }
+
+    function CleanURL(title) {
+      const string = title.replace(/[^A-Za-z0-9- ]/g, "").trim()
+      const str = string.replace(/[\s-]+/g, "-")
+    
+      return str.toLowerCase()
+    }
+
+    async function list() {
+      const url = await fetch(`https://vww.lagu123.fun`);
+      const crop = Crop(
+        '<h2 class="ht">Download Lagu Gratis</h2>',
+        "</div></div>",
+        await url.text()
+      );
+      let isi = ""
+
+      const link = `https://wappur1.netlify.app`
+      const listArray = crop.split('title="')
+      listArray && listArray.length > 0 && listArray.map((i, n) => {
+        if (n === 0) return null
+        ok = i.split('">')[0]
+        const link1 = `${link}/download/${CleanURL(ok.replace("Download musik ", ""))}`
+        isi += `<item>
+        <title>
+        <![CDATA[ ${ok} ]]>
+        </title>
+        <description>
+        <![CDATA[ Download lagu ${ok.replace("Download musik ", "")} (${Math.floor(Math.random() * (10 - 5.5)) + 5.5} MB) dan Streaming Kumpulan Lagu ${ok.replace("Download musik ", "")} Terbaru di Lagubebass. ]]>
+        </description>
+        <link>${link1}</link>
+        <guid isPermaLink="true">${link1}</guid>
+        <pubDate>${getCurrentDate()}</pubDate>
+        </item>`
+      })
+
+      const head = `<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+      <script/>
+      <channel>
+      <title>
+      <![CDATA[ Lagubebass RSS Feed ]]>
+      </title>
+      <description>
+      <![CDATA[ Lagubebass adalah situs download lagu gratis, gudang lagu Mp3 indonesia, lagu barat terbaik. Download lagu 123 terbaru mp3 - mudah, cepat, nyaman. ]]>
+      </description>
+      <link>${link}</link>
+      <generator>GatsbyJS</generator>
+      <lastBuildDate>${getCurrentDate()}</lastBuildDate>`
+      
+      const foot = `</channel></rss>`
+
+      res.setHeader("Content-Type", "application/xml");
+
+      return res.send(head+isi+foot);
+    }
+    list()
   });
 
-app.listen(5000, () => {
-  console.log("Running on port 5000.");
+app.listen(8000, () => {
+  console.log("Running on port 8000.");
 });
 
 // Export the Express API
