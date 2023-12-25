@@ -63,6 +63,7 @@ app.get("/", (req, res) => {
         <link>${link1}</link>
         <guid isPermaLink="true">${link1}</guid>
         <pubDate>${getCurrentDate()}</pubDate>
+        <media:thumbnail url="https://cdns.klimg.com/bola.net/library/upload/21/2023/12/liga-inggris-premier_e015c81.jpg"/>
         </item>`
       })
 
