@@ -64,7 +64,7 @@ app.get("/", (req, res) => {
         <guid isPermaLink="true">${link1}</guid>
         <pubDate>${getCurrentDate()}</pubDate>
         <content:encoded>
-<![CDATA[ <figure><img src="https://cdns.klimg.com/bola.net/library/upload/21/2023/12/liga-inggris-premier_e015c81.jpg" /></figure> ]]>
+<![CDATA[ <figure><img src="https://wappur1.netlify.app/icons/icon-512x512.png" /></figure> ]]>
 </content:encoded>
         </item>`
       })
