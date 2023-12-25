@@ -52,7 +52,7 @@ app.get("/", (req, res) => {
       listArray && listArray.length > 0 && listArray.map((i, n) => {
         if (n === 0) return null
         ok = i.split('">')[0]
-        const link1 = `${link}/download/${CleanURL(ok.replace("Download musik ", ""))}`
+        const link1 = `${link}/download/${CleanURL(ok.replace("Download musik ", ""))}/`
         isi += `<item>
         <title>
         <![CDATA[ ${ok} ]]>
