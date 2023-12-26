@@ -7,11 +7,23 @@ app.get("/", (req, res) => {
   res.send("Hello");
 }),
   app.get("/rss.xml", (_, res) => {
-
     function getCurrentDate() {
-      const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    
+      const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+      const months = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+
       const currentDate = new Date();
       const dayOfWeek = daysOfWeek[currentDate.getUTCDay()];
       const dayOfMonth = currentDate.getUTCDate();
@@ -20,8 +32,14 @@ app.get("/", (req, res) => {
       const hours = currentDate.getUTCHours();
       const minutes = currentDate.getUTCMinutes();
       const seconds = currentDate.getUTCSeconds();
-    
-      return `${dayOfWeek}, ${Math.floor(Math.random() * (dayOfMonth - 1) + 1)} ${month} ${year} ${Math.floor(Math.random() * (hours - 1) + 1)}:${Math.floor(Math.random() * (minutes - 1) + 1)}:${Math.floor(Math.random() * (seconds - 1) + 1)} GMT`;
+
+      return `${dayOfWeek}, ${Math.floor(
+        Math.random() * (dayOfMonth - 1) + 1
+      )} ${month} ${year} ${Math.floor(
+        Math.random() * (hours - 1) + 1
+      )}:${Math.floor(Math.random() * (minutes - 1) + 1)}:${Math.floor(
+        Math.random() * (seconds - 1) + 1
+      )} GMT`;
     }
 
     function Crop(awal, akhir, text) {
@@ -32,10 +50,10 @@ app.get("/", (req, res) => {
     }
 
     function CleanURL(title) {
-      const string = title.replace(/[^A-Za-z0-9- ]/g, "").trim()
-      const str = string.replace(/[\s-]+/g, "-")
-    
-      return str.toLowerCase()
+      const string = title.replace(/[^A-Za-z0-9- ]/g, "").trim();
+      const str = string.replace(/[\s-]+/g, "-");
+
+      return str.toLowerCase();
     }
 
     async function list() {
@@ -45,29 +63,47 @@ app.get("/", (req, res) => {
         "</div></div>",
         await url.text()
       );
-      let isi = ""
+      let isi = "";
 
-      const link = `https://lagubebassmp3.netlify.app`
-      const listArray = crop.split('title="')
-      listArray && listArray.length > 0 && listArray.map((i, n) => {
-        if (n === 0) return null
-        ok = i.split('">')[0]
-        const link1 = `${link}/m/${CleanURL(ok.replace("Download musik ", ""))}.html`
-        isi += `<item>
+      const link = `https://lagubebassmp3.netlify.app`;
+      const listArray = crop.split('title="');
+      listArray &&
+        listArray.length > 0 &&
+        listArray.map((i, n) => {
+          if (n === 0) return null;
+          ok = i.split('">')[0];
+          const link1 = `${link}/m/${CleanURL(
+            ok.replace("Download musik ", "")
+          )}.html`;
+          isi += `<item>
         <title>
-        <![CDATA[ ${ok} ]]>
+        <![CDATA[ Download lagu ${ok.replace("Download musik ", "")} ]]>
         </title>
         <description>
-        <![CDATA[ Download lagu ${ok.replace("Download musik ", "")} (${Math.floor(Math.random() * (10 - 5.5)) + 5.5} MB) dan Streaming Kumpulan Lagu ${ok.replace("Download musik ", "")} Terbaru di Lagubebass. ]]>
+        <![CDATA[ Download lagu ${ok.replace("Download musik ", "")} (${
+            Math.floor(Math.random() * (10 - 5.5)) + 5.5
+          } MB) dan Streaming Kumpulan Lagu ${ok.replace(
+            "Download musik ",
+            ""
+          )} Terbaru di Lagubebass. ]]>
         </description>
         <link>${link1}</link>
         <guid isPermaLink="true">${link1}</guid>
         <pubDate>${getCurrentDate()}</pubDate>
         <content:encoded>
-<![CDATA[ <figure><img src="https://wappur1.netlify.app/icons/icon-512x512.png" /></figure><p>Download ${ok.replace("Download musik ", "")} mp3, fast and easy ~ ${ok.replace("Download musik ", "")} song and listen to ${ok.replace("Download musik ", "")} popular song on MP3 Music Download.</p> ]]>
-</content:encoded>
-        </item>`
-      })
+          <![CDATA[ <figure><img src="https://wappur1.netlify.app/icons/icon-512x512.png" /></figure><p>Download ${ok.replace(
+            "Download musik ",
+            ""
+          )} mp3, fast and easy ~ ${ok.replace(
+            "Download musik ",
+            ""
+          )} song and listen to ${ok.replace(
+            "Download musik ",
+            ""
+          )} popular song on MP3 Music Download.</p> ]]>
+          </content:encoded>
+        </item>`;
+        });
 
       const head = `<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
       <script/>
@@ -80,15 +116,15 @@ app.get("/", (req, res) => {
       </description>
       <link>${link}</link>
       <generator>GatsbyJS</generator>
-      <lastBuildDate>${getCurrentDate()}</lastBuildDate>`
-      
-      const foot = `</channel></rss>`
+      <lastBuildDate>${getCurrentDate()}</lastBuildDate>`;
+
+      const foot = `</channel></rss>`;
 
       res.setHeader("Content-Type", "application/xml");
 
-      return res.send(head+isi+foot);
+      return res.send(head + isi + foot);
     }
-    list()
+    list();
   });
 
 app.listen(8000, () => {
