@@ -47,12 +47,12 @@ app.get("/", (req, res) => {
       );
       let isi = ""
 
-      const link = `https://wappur1.netlify.app`
+      const link = `https://lagubebassmp3.netlify.app`
       const listArray = crop.split('title="')
       listArray && listArray.length > 0 && listArray.map((i, n) => {
         if (n === 0) return null
         ok = i.split('">')[0]
-        const link1 = `${link}/download/${CleanURL(ok.replace("Download musik ", ""))}/`
+        const link1 = `${link}/m/${CleanURL(ok.replace("Download musik ", ""))}.html`
         isi += `<item>
         <title>
         <![CDATA[ ${ok} ]]>
@@ -64,7 +64,7 @@ app.get("/", (req, res) => {
         <guid isPermaLink="true">${link1}</guid>
         <pubDate>${getCurrentDate()}</pubDate>
         <content:encoded>
-<![CDATA[ <figure><img src="https://wappur1.netlify.app/icons/icon-512x512.png" /></figure> ]]>
+<![CDATA[ <figure><img src="https://wappur1.netlify.app/icons/icon-512x512.png" /></figure><p>Download ${ok.replace("Download musik ", "")} mp3, fast and easy ~ ${ok.replace("Download musik ", "")} song and listen to ${ok.replace("Download musik ", "")} popular song on MP3 Music Download.</p> ]]>
 </content:encoded>
         </item>`
       })
