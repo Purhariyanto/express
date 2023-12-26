@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
       const minutes = currentDate.getUTCMinutes();
       const seconds = currentDate.getUTCSeconds();
     
-      return `${dayOfWeek}, ${dayOfMonth} ${month} ${year} ${hours}:${minutes}:${seconds} GMT`;
+      return `${dayOfWeek}, ${Math.floor(Math.random() * (dayOfMonth - 1) + 1)} ${month} ${year} ${Math.floor(Math.random() * (hours - 1) + 1)}:${Math.floor(Math.random() * (minutes - 1) + 1)}:${Math.floor(Math.random() * (seconds - 1) + 1)} GMT`;
     }
 
     function Crop(awal, akhir, text) {
