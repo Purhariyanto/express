@@ -92,7 +92,7 @@ app.get("/", (req, res) => {
         <guid isPermaLink="true">${link1}</guid>
         <pubDate>${getCurrentDate()}</pubDate>
         <content:encoded>
-          <![CDATA[ <figure><img src="https://${link}/icons/icon-512x512.png" /></figure><p>Download ${ok.replace(
+          <![CDATA[ <figure><img src="${link}/icons/icon-512x512.png" /></figure><p>Download ${ok.replace(
             "Download musik ",
             ""
           )} mp3, fast and easy ~ ${ok.replace(
