@@ -65,16 +65,17 @@ app.get("/", (req, res) => {
       );
       let isi = "";
 
-      const link = `https://lagubebassmp3.netlify.app`;
+      const link = `https://www.bwar.tech`;
+      const title = `Bwarlagu`
       const listArray = crop.split('title="');
       listArray &&
         listArray.length > 0 &&
         listArray.map((i, n) => {
           if (n === 0) return null;
           ok = i.split('">')[0];
-          const link1 = `${link}/m/${CleanURL(
+          const link1 = `${link}/download/${CleanURL(
             ok.replace("Download musik ", "")
-          )}.html`;
+          )}`;
           isi += `<item>
         <title>
         <![CDATA[ Download lagu ${ok.replace("Download musik ", "")} ]]>
@@ -85,13 +86,13 @@ app.get("/", (req, res) => {
           } MB) dan Streaming Kumpulan Lagu ${ok.replace(
             "Download musik ",
             ""
-          )} Terbaru di Lagubebass. ]]>
+          )} Terbaru di ${title}. ]]>
         </description>
         <link>${link1}</link>
         <guid isPermaLink="true">${link1}</guid>
         <pubDate>${getCurrentDate()}</pubDate>
         <content:encoded>
-          <![CDATA[ <figure><img src="https://wappur1.netlify.app/icons/icon-512x512.png" /></figure><p>Download ${ok.replace(
+          <![CDATA[ <figure><img src="https://${link}/icons/icon-512x512.png" /></figure><p>Download ${ok.replace(
             "Download musik ",
             ""
           )} mp3, fast and easy ~ ${ok.replace(
@@ -109,10 +110,10 @@ app.get("/", (req, res) => {
       <script/>
       <channel>
       <title>
-      <![CDATA[ Lagubebass RSS Feed ]]>
+      <![CDATA[ ${title} RSS Feed ]]>
       </title>
       <description>
-      <![CDATA[ Lagubebass adalah situs download lagu gratis, gudang lagu Mp3 indonesia, lagu barat terbaik. Download lagu 123 terbaru mp3 - mudah, cepat, nyaman. ]]>
+      <![CDATA[ ${title} adalah situs download lagu gratis, gudang lagu Mp3 indonesia, lagu barat terbaik. Download lagu 123 terbaru mp3 - mudah, cepat, nyaman. ]]>
       </description>
       <link>${link}</link>
       <generator>GatsbyJS</generator>
