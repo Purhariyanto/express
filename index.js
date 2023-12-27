@@ -78,7 +78,7 @@ app.get("/google4b0784f451721b6b.html", (req, res) => {
           ok = i.split('">')[0];
           const link1 = `${link}/download/${CleanURL(
             ok.replace("Download musik ", "")
-          )}`;
+          )}/`;
           isi += `<item>
         <title>
         <![CDATA[ Download lagu ${ok.replace("Download musik ", "")} ]]>
