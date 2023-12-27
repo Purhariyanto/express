@@ -6,6 +6,9 @@ const app = express();
 app.get("/", (req, res) => {
   res.send("Hello");
 }),
+app.get("/google4b0784f451721b6b.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "google4b0784f451721b6b.html"))
+}),
   app.get("/rss.xml", (_, res) => {
     function getCurrentDate() {
       const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
