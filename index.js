@@ -94,18 +94,6 @@ app.get("/google4b0784f451721b6b.html", (req, res) => {
         <link>${link1}</link>
         <guid isPermaLink="true">${link1}</guid>
         <pubDate>${getCurrentDate()}</pubDate>
-        <content:encoded>
-          <![CDATA[ <figure><img src="${link}/icons/icon-512x512.png" /></figure><p>Download ${ok.replace(
-            "Download musik ",
-            ""
-          )} mp3, fast and easy ~ ${ok.replace(
-            "Download musik ",
-            ""
-          )} song and listen to ${ok.replace(
-            "Download musik ",
-            ""
-          )} popular song on MP3 Music Download.</p> ]]>
-          </content:encoded>
         </item>`;
         });
 
