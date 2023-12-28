@@ -68,7 +68,7 @@ app.get("/google4b0784f451721b6b.html", (req, res) => {
       );
       let isi = "";
 
-      const link = `https://www.bwar.tech`;
+      const link = `https://lagubebassmp3.netlify.app`;
       const title = `Bwarlagu`
       const listArray = crop.split('title="');
       listArray &&
@@ -76,9 +76,9 @@ app.get("/google4b0784f451721b6b.html", (req, res) => {
         listArray.map((i, n) => {
           if (n === 0) return null;
           ok = i.split('">')[0];
-          const link1 = `${link}/download/${CleanURL(
+          const link1 = `${link}/m/${CleanURL(
             ok.replace("Download musik ", "")
-          )}/`;
+          )}.html`;
           isi += `<item>
         <title>
         <![CDATA[ Download lagu ${ok.replace("Download musik ", "")} ]]>
