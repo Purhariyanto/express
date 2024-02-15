@@ -43,7 +43,7 @@ async function getData() {
     const totaltps = response.data.progres["total"];
     const persentps = ((progres / totaltps) * 100).toFixed(2);
     const waktu = response.data.ts;
-    const text = `HASIL HITUNG SUARA PEMILU PRESIDEN & WAKIL PRESIDEN RI 2024 #Pemilu2024\n\nVersi: ${waktu} Progress: ${progres} dari ${totaltps} TPS (${persentps}%)\n\n01 : Suara ${c1} (${persentaseData1}%)\n\n02 : Suara ${c2} (${persentaseData2}%)\n\n03 : Suara ${c3} (${persentaseData3}%)\n\nSumber: https://pemilu2024.kpu.go.id/
+    const text = `HASIL HITUNG SUARA PEMILU PRESIDEN & WAKIL PRESIDEN RI 2024 #Pemilu2024\n\nVersi: ${waktu} Progress: ${progres} dari ${totaltps} TPS (${persentps}%)\n\n01 : Suara ${c1} (${persentaseData1}%)\n\n02 : Suara ${c2} (${persentaseData2}%)\n\n03 : Suara ${c3} (${persentaseData3}%)\n\nSumber: kpu.go.id
     `;
     tweet(text);
   } catch (error) {
